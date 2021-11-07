@@ -1,0 +1,66 @@
+---
+title: "model tst"
+author: "Dian Chen"
+date: "11/5/2021"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+real <- read.csv("real.csv")
+ally <- read.csv("ally.csv")
+```
+
+```{r}
+head(real)
+head(ally)
+```
+
+```{r}
+library(dplyr)
+
+merge <- read.csv("Merge.csv")
+head(merge)
+```
+
+```{r}
+plot(rate ~ c_avg, data = merge, xlim = c(0.1, 0.3))
+```
+```{r}
+plot(rate~c_elas, data = merge)
+```
+
+we can get that the important variables are fed_avg st_avg st_elas
+
+```{r}
+plot(log(rate)~log(c_marg), data = merge)
+```
+```{r}
+
+```
+
+
+
+```{r}
+lm1 <- lm(rate ~c_avg, data = merge)
+summary(lm1)
+```
+
+```{r}
+library(car)
+inverseResponsePlot(lm1)
+```
+
+```{r}
+lm2<- lm((rate ^ 0.5843728) ~ log(c_avg) , data = merge)
+summary(lm2)
+```
+
+
+```{r}
+plot(lm2)
+```
+
